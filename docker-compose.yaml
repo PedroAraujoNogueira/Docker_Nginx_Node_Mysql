@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  nginx: 
+    build:
+      context: ./nginx
+      dockerfile: dockerfile.prod
+    image: pedroaraujonogueira/nginx-proxy:prod
+    container_name: teste-nginx
+    networks:
+      - nginxnet
+    ports: 
+      - "8080:80" 
+
+  app-node:
+    build: 
+      context: NodeMySQL
+    container_name: node-mysql
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
+    command: 'node index.js' 
+    volumes:
+      - ./NodeMySQL:/usr/src/application
+    networks:
+      - nginxnet
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - db
+
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0 
+    container_name: db-mysql
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+     - MYSQL_DATABASE=nodedb
+     - MYSQL_ROOT_PASSWORD=root
+     - MYSQL_USER=pedro
+    networks:
+      - nginxnet
+
+networks:
+  nginxnet: 
+    driver: bridge 

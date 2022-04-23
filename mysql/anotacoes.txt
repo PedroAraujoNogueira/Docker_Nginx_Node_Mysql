@@ -1,0 +1,1 @@
+Após rodar o comando docker-compose up -d --build essa pasta será preenchida.
