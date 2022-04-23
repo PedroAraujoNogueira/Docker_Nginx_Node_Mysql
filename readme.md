@@ -1,7 +1,7 @@
 # Docker_Nginx_Node_Mysql  
 
 ### Como executar o projeto:  
--> Para ver o resultado basta, após baixar o projeto, usar o seguinte comando no seu terminal:
+-> Para ver o resultado basta, após baixar o projeto, usar o seguinte comando no seu terminal:  
 docker-compose up -d --build  
 
 ### Descrição do projeto:  
