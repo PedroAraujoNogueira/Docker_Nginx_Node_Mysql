@@ -11,9 +11,13 @@ const config = {
 
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
-connection.query(`create table people(id int not null auto_increment, name varchar(255), primary key(id))`)
+connection.query(`create table people(id int not null auto_increment, name varchar(255), primary key(id))`, 
+    function (error, results, fields) {
+        console.log('Provavelmente é um erro pq a tabela já foi criada!')
+})
 
-app.get('/', async (req, resp) => {
+
+app.get('/', (req, resp) => {
     const sql = `INSERT INTO people(name) values ('Pedro')`
     connection.query(sql)
 
