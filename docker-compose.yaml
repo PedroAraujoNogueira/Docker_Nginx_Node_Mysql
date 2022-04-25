@@ -18,7 +18,7 @@ services:
       context: NodeMySQL
     container_name: node-mysql
     entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
-    command: 'node index.js' 
+    command: bash -c 'npm i && node index.js' 
     volumes:
       - ./NodeMySQL:/usr/src/application
     networks:
