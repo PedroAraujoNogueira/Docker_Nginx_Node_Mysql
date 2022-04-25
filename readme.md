@@ -3,6 +3,8 @@
 ### Como executar o projeto:  
 -> Para ver o resultado basta, após baixar o projeto, usar o seguinte comando no seu terminal:  
 docker-compose up -d --build  
+-> Após rodar o comando acima, acesse localhost:8080 no seu navegador.  
+-> Caso queira derrubar o ambiente use o comando docker-compose down.  
 
 ### Descrição do projeto:  
 Esse projeto tem o objetivo de gerar um arquivo Docker Compose que
