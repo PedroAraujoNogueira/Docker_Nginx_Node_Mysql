@@ -8,10 +8,14 @@ services:
       dockerfile: dockerfile.prod
     image: pedroaraujonogueira/nginx-proxy:prod
     container_name: teste-nginx
+    entrypoint: dockerize -wait tcp://app-node:3000 -timeout 50s 
+    command: ["nginx", "-g", "daemon off;"]
     networks:
       - nginxnet
     ports: 
-      - "8080:80" 
+      - "8080:80"
+    depends_on:
+      - app-node 
 
   app-node:
     build: 
